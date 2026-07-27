@@ -1,0 +1,13 @@
+{
+    "allowed_tools": [
+        "search",
+        "database",
+        "calculator"
+    ],
+    "blocked_tools": [
+        "send_email",
+        "delete_database",
+        "format_disk",
+        "send_data"
+    ]
+}

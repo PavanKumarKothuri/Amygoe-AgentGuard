@@ -1,7 +1,8 @@
-print("🛡️ Welcome to Amygoe-AgentGuard!")
-print("Sprint 1 - Day 3\n")
-
 from agentguard.guard import AgentGuard
+from agentguard.tools import search, send_email, database
+
+print("🛡️ Welcome to Amygoe-AgentGuard!")
+print("Sprint 1 - Day 4\n")
 
 # Create AgentGuard object
 guard = AgentGuard()
@@ -9,20 +10,36 @@ guard = AgentGuard()
 # Start AgentGuard
 guard.start()
 
-# List of tools to test
-tools = [
-    "search",
-    "send_email",
-    "delete_database",
-    "calculator",
-    "format_disk",
-    "weather_api"
-]
 
-# Check every tool
-for tool in tools:
+# -----------------------------
+# Search Tool
+# -----------------------------
+if guard.check_tool("search"):
+    search("Python security")
 
-    if guard.check_tool(tool):
-        print(f"➡️ {tool} executed successfully.\n")
-    else:
-        print(f"🚫 {tool} execution denied.\n")
+print()
+
+
+# -----------------------------
+# Email Tool
+# -----------------------------
+if guard.check_tool("send_email"):
+    send_email()
+
+print()
+
+
+# -----------------------------
+# Database Tool
+# -----------------------------
+if guard.check_tool("database"):
+    database()
+
+print()
+
+
+# -----------------------------
+# Unknown Tool
+# -----------------------------
+if guard.check_tool("weather_api"):
+    print("Weather tool executed.")

@@ -1,8 +1,18 @@
-"""Utility tools for AgentGuard."""
+"""
+Utility tools for Amygoe-AgentGuard.
+"""
 
 
-class Tools:
-    """Placeholder tools container."""
+def search(query):
+    """Simulate a search tool."""
+    print(f"🔍 Searching for: {query}")
 
-    def __init__(self) -> None:
-        self.available = []
+
+def send_email():
+    """Simulate an email tool."""
+    print("📧 Sending email...")
+
+
+def database():
+    """Simulate a database tool."""
+    print("🗄️ Reading customer database...")
