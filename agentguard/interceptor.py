@@ -1,8 +1,20 @@
-"""Interceptor hooks for AgentGuard."""
+# """Interceptor hooks for AgentGuard."""
+
+
+# class Interceptor:
+#     """Placeholder interceptor implementation."""
+
+#     def __init__(self) -> None:
+#         self.active = True
+
+
+"""
+Interceptor for Amygoe-AgentGuard.
+"""
 
 
 class Interceptor:
-    """Placeholder interceptor implementation."""
 
-    def __init__(self) -> None:
-        self.active = True
+    def intercept(self, tool_name):
+
+        print(f"Intercepting request for '{tool_name}'")
