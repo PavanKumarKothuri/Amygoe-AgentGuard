@@ -1,9 +1,14 @@
 {
+    "policy_name": "Default Policy",
+    "version": "1.0",
+    "security_level": "Medium",
+
     "allowed_tools": [
         "search",
         "database",
         "calculator"
     ],
+
     "blocked_tools": [
         "send_email",
         "delete_database",

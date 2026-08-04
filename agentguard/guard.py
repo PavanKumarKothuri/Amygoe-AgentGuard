@@ -8,15 +8,21 @@ class AgentGuard:
         self.name = "Amygoe-AgentGuard"
         self.version = "0.0.1"
         self.policy = POLICY
-
+    
     def start(self):
-        print(f"\n🛡️ {self.name} v{self.version} started.\n")
+        print(f"\n🛡️ {self.name} v{self.version} started.")
+        print(f"📜 Policy : {self.policy['policy_name']}")
+        print(f"🛡️ Security Level : {self.policy['security_level']}\n")
 
     def execute(self, tool_name, tool_function, *args):
 
         self.interceptor.intercept(tool_name)
 
-        if self.check_tool(tool_name):
+        decision = self.check_tool(tool_name)
+
+        print(f"Decision : {decision['reason']}")
+
+        if decision["allowed"]:
 
             tool_function(*args)
 
@@ -29,12 +35,23 @@ class AgentGuard:
         print(f"Checking tool: {tool_name}")
 
         if tool_name in self.policy["blocked_tools"]:
-            print("❌ Blocked\n")
-            return False
+
+            return {
+            "allowed": False,
+            "reason": "Tool is blocked by policy"
+            }
 
         if tool_name in self.policy["allowed_tools"]:
-            print("✅ Allowed\n")
-            return True
 
-        print("❌ Unknown Tool (Default Deny)\n")
-        return False
+            return {
+            "allowed": True,
+            "reason": "Tool is allowed"
+            }
+
+        return {
+        "allowed": False,
+        "reason": "Unknown tool (Default Deny)"
+        }
+    
+
+    
