@@ -6,7 +6,8 @@
     "allowed_tools": [
         "search",
         "database",
-        "calculator"
+        "calculator",
+        "broken_tool"
     ],
 
     "blocked_tools": [

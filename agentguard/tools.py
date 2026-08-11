@@ -16,3 +16,7 @@ def send_email():
 def database():
     """Simulate a database tool."""
     print("🗄️ Reading customer database...")
+
+def broken_tool():
+    """Simulate a tool failure."""
+    raise RuntimeError("Database connection failed")
