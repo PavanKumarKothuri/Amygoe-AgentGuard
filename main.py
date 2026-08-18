@@ -11,14 +11,11 @@ from agentguard.exceptions import ToolBlockedError
 
 
 print("🛡️ Welcome to Amygoe-AgentGuard!")
-print("Sprint 1 - Day 8\n")
+print("Sprint 1 - Day 9\n")
 
 
-# Create AgentGuard object
 guard = AgentGuard()
 
-
-# Start AgentGuard
 guard.start()
 
 
@@ -48,7 +45,9 @@ try:
 
 except ToolBlockedError as error:
 
-    print(f"🛡️ Security Event: {error}")
+    print(
+        f"🛡️ Security Event: {error}"
+    )
 
 print()
 
@@ -73,12 +72,16 @@ try:
 
     guard.execute(
         "weather_api",
-        lambda: print("🌦️ Weather API Executed")
+        lambda: print(
+            "🌦️ Weather API Executed"
+        )
     )
 
 except ToolBlockedError as error:
 
-    print(f"🛡️ Security Event: {error}")
+    print(
+        f"🛡️ Security Event: {error}"
+    )
 
 print()
 
@@ -87,13 +90,7 @@ print()
 # 5. Broken Tool
 # ------------------------------------
 
-try:
-
-    guard.execute(
-        "broken_tool",
-        broken_tool
-    )
-
-except ToolBlockedError as error:
-
-    print(f"🛡️ Security Event: {error}")
+guard.execute(
+    "broken_tool",
+    broken_tool
+)
