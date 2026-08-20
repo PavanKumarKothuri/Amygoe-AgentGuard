@@ -5,13 +5,13 @@
 
     "allowed_tools": [
         "search",
-        "database",
         "calculator",
         "broken_tool"
     ],
 
     "blocked_tools": [
         "send_email",
+        "database",        
         "delete_database",
         "format_disk",
         "send_data"

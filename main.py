@@ -11,7 +11,7 @@ from agentguard.exceptions import ToolBlockedError
 
 
 print("🛡️ Welcome to Amygoe-AgentGuard!")
-print("Sprint 1 - Day 9\n")
+print("Making the MVP OSS\n")
 
 
 guard = AgentGuard()
@@ -53,13 +53,21 @@ print()
 
 
 # ------------------------------------
-# 3. Allowed Database Tool
+# 3. Database Tool
 # ------------------------------------
 
-guard.execute(
-    "database",
-    database
-)
+try:
+
+    guard.execute(
+        "database",
+        database
+    )
+
+except ToolBlockedError as error:
+
+    print(
+        f"🛡️ Security Event: {error}"
+    )
 
 print()
 
