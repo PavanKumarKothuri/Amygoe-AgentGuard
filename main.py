@@ -1,18 +1,16 @@
 from agentguard.guard import AgentGuard
-
-from agentguard.tools import (
-    search,
-    send_email,
-    database,
-    broken_tool
-)
-
 from agentguard.exceptions import ToolBlockedError
+from agent import DemoAgent
 
 
 print("🛡️ Welcome to Amygoe-AgentGuard!")
-print("Making the MVP OSS\n")
+print("Sprint 1 - Day 12")
+print("🤖 AI Agent Security Demo\n")
 
+
+# ------------------------------------
+# Create AgentGuard
+# ------------------------------------
 
 guard = AgentGuard()
 
@@ -20,85 +18,58 @@ guard.start()
 
 
 # ------------------------------------
-# 1. Allowed Tool
+# Create AI Agent
 # ------------------------------------
 
-guard.execute(
-    "search",
-    search,
-    "Python security"
-)
-
-print()
+agent = DemoAgent(guard)
 
 
 # ------------------------------------
-# 2. Blocked Tool
+# Agent Task 1
 # ------------------------------------
 
 try:
 
-    guard.execute(
-        "send_email",
-        send_email
+    agent.run(
+        "Search for information about AI security"
     )
 
 except ToolBlockedError as error:
 
     print(
-        f"🛡️ Security Event: {error}"
+        f"\n🛡️ Security Event: {error}"
     )
-
-print()
 
 
 # ------------------------------------
-# 3. Database Tool
+# Agent Task 2
 # ------------------------------------
 
 try:
 
-    guard.execute(
-        "database",
-        database
+    agent.run(
+        "Send an email containing the results"
     )
 
 except ToolBlockedError as error:
 
     print(
-        f"🛡️ Security Event: {error}"
+        f"\n🛡️ Security Event: {error}"
     )
-
-print()
 
 
 # ------------------------------------
-# 4. Unknown Tool
+# Agent Task 3
 # ------------------------------------
 
 try:
 
-    guard.execute(
-        "weather_api",
-        lambda: print(
-            "🌦️ Weather API Executed"
-        )
+    agent.run(
+        "Access the customer database"
     )
 
 except ToolBlockedError as error:
 
     print(
-        f"🛡️ Security Event: {error}"
+        f"\n🛡️ Security Event: {error}"
     )
-
-print()
-
-
-# ------------------------------------
-# 5. Broken Tool
-# ------------------------------------
-
-guard.execute(
-    "broken_tool",
-    broken_tool
-)
