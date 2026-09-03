@@ -43,7 +43,8 @@ class AgentGuard:
         self,
         tool_name,
         tool_function,
-        *args
+        *args,
+        **kwargs
     ):
 
         # ------------------------------------
@@ -99,14 +100,19 @@ class AgentGuard:
 
         try:
 
-            tool_function(*args)
+            result = tool_function(
+                *args,
+                **kwargs
+            )
 
             logger.info(
                 f"Executed : {tool_name}"
             )
 
+            return result
+
         # ------------------------------------
-        # 5. Handle tool execution failure
+        # 5. Handle tool failure
         # ------------------------------------
 
         except Exception as error:
@@ -118,5 +124,10 @@ class AgentGuard:
 
             print(
                 f"⚠️ Tool '{tool_name}' "
+                f"failed: {error}"
+            )
+
+            return (
+                f"Tool '{tool_name}' "
                 f"failed: {error}"
             )

@@ -1,22 +1,49 @@
-"""
-Utility tools for Amygoe-AgentGuard.
-"""
+"""Demo tools used by the AgentGuard MVP."""
 
 
 def search(query):
-    """Simulate a search tool."""
-    print(f"🔍 Searching for: {query}")
+
+    print(
+        f"🔍 Searching for: {query}"
+    )
+
+    return (
+        f"Search completed for '{query}'. "
+        "Found information about AI security, "
+        "prompt injection, agent permissions, "
+        "and runtime monitoring."
+    )
 
 
-def send_email():
-    """Simulate an email tool."""
-    print("📧 Sending email...")
+def send_email(recipient, message):
+
+    print(
+        f"📧 Sending email to: {recipient}"
+    )
+
+    print(
+        f"📝 Message: {message}"
+    )
+
+    return (
+        f"Email successfully sent to "
+        f"{recipient}."
+    )
 
 
-def database():
-    """Simulate a database tool."""
-    print("🗄️ Reading customer database...")
+def database(query):
+
+    print(
+        f"🗄️ Database query: {query}"
+    )
+
+    return (
+        "Database returned 3 customer records."
+    )
+
 
 def broken_tool():
-    """Simulate a tool failure."""
-    raise RuntimeError("Database connection failed")
+
+    raise RuntimeError(
+        "Database connection failed"
+    )
