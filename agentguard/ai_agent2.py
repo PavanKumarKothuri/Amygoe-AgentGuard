@@ -179,8 +179,6 @@ class AIAgent:
             # Process tool calls
             # --------------------------------
 
-            blocked = False
-
             for tool_call in message.tool_calls:
 
                 tool_name = tool_call.function.name
@@ -211,12 +209,9 @@ class AIAgent:
                 if tool_function is None:
 
                     result = (
-                        f"SECURITY BLOCK: Unknown tool "
-                        f"'{tool_name}'. "
-                        "Do not retry this action."
+                        f"Unknown tool: "
+                        f"{tool_name}"
                     )
-
-                    blocked = True
 
                 else:
 
@@ -228,6 +223,7 @@ class AIAgent:
                         "\n🛡️ AgentGuard intercepting..."
                     )
 
+
                     try:
 
                         result = self.guard.execute(
@@ -238,27 +234,16 @@ class AIAgent:
 
                     except ToolBlockedError as error:
 
-                        print(
-                            f"\n🛡️ Security Event: "
-                            f"Tool '{tool_name}' "
-                            f"was blocked by AgentGuard."
-                        )
-
                         result = (
-                            f"SECURITY BLOCK: {error}. "
-                            f"The tool '{tool_name}' "
-                            "is not permitted by the "
-                            "current AgentGuard policy. "
-                            "Do not retry this action."
-                        )
-
-                        blocked = True
+                            f"SECURITY BLOCK: {error}"
+                )
 
                 # --------------------------------
                 # Return tool result to ChatGPT
                 # --------------------------------
 
                 messages.append(
+
                     {
                         "role": "tool",
                         "tool_call_id": (
@@ -268,57 +253,7 @@ class AIAgent:
                     }
                 )
 
-            # --------------------------------
-            # 🛑 Security stop
-            # --------------------------------
-            #
-            # If AgentGuard blocked a tool,
-            # stop the tool-calling loop.
-            #
-            # We now ask the LLM for a final
-            # response WITHOUT tools.
-            # --------------------------------
-
-            if blocked:
-
-                print(
-                    "\n🛡️ AgentGuard stopped "
-                    "further tool execution."
-                )
-
-                final_response = (
-                    self.client.chat.completions.create(
-                        model="gpt-4o-mini",
-                        messages=messages
-                    )
-                )
-
-                final_message = (
-                    final_response
-                    .choices[0]
-                    .message
-                )
-
-                print(
-                    "\n🧠 Final AI response:"
-                )
-
-                print(
-                    final_message.content
-                )
-
-                return final_message.content
-
-        # --------------------------------
-        # Maximum agent steps reached
-        # --------------------------------
-
         print(
             "\n⚠️ Agent stopped after "
             "maximum steps."
-        )
-
-        return (
-            "Agent stopped after reaching "
-            "the maximum number of steps."
         )
